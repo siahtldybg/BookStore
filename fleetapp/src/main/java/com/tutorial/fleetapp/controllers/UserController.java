@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import com.tutorial.fleetapp.models.User;
+import com.tutorial.fleetapp.repositories.UserRepository;
 import com.tutorial.fleetapp.services.UserService;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
+
 import com.tutorial.fleetapp.services.UserService;
 
 @Controller
@@ -23,6 +27,8 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	private UserRepository userRepository;
 
 	@GetMapping("/users")
 	public String getUsers(Model model) {
@@ -53,12 +59,23 @@ public class UserController {
 
 	@PostMapping(value = "users/addNew")
 	public String addNew(User user, RedirectAttributes redir, @RequestParam("password") String password,
-			@RequestParam("confirmPassword") String confirmPassword) {
+			@RequestParam("confirmPassword") String confirmPassword, @RequestParam("username") String username)
+			throws IllegalStateException, IOException {
 
-		if (!password.equals(confirmPassword)) {
-			redir.addFlashAttribute("message", "Mật khẩu không trùng khớp!");
+		if (userService.findByUsername(username) != null) {
+			redir.addFlashAttribute("message", "Tên đăng nhập đã tồn tại!!!");
 			return "redirect:/users";
 		}
+		if (!password.equals(confirmPassword)) {
+			redir.addFlashAttribute("message", "Mật khẩu không trùng khớp!!!");
+			return "redirect:/users";
+		}
+		// if (file.isEmpty()) {
+		// user.setPhoto("user.jpg");
+		// } else {
+		// user.setPhoto(file.getOriginalFilename());
+		// }
+		redir.addFlashAttribute("message", "Tạo tài khoản thành công!!!");
 		userService.save(user);
 		return "redirect:/users";
 
