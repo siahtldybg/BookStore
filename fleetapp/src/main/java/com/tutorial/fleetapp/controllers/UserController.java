@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import com.tutorial.fleetapp.models.User;
+import com.tutorial.fleetapp.models.UserPrincipal;
 import com.tutorial.fleetapp.repositories.UserRepository;
 import com.tutorial.fleetapp.services.UserService;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,20 +48,17 @@ public class UserController {
 	// Modified method to Add a new user User
 	@PostMapping(value = "/register/addNew")
 	public RedirectView addNew(User user, RedirectAttributes redir) {
-
+		user.setPhoto("user.jpg");
 		userService.save(user);
-
 		RedirectView redirectView = new RedirectView("/login", true);
-
 		redir.addFlashAttribute("message", "You successfully registered! You can now login");
-
 		return redirectView;
 	}
 
 	@PostMapping(value = "users/addNew")
 	public String addNew(User user, RedirectAttributes redir, @RequestParam("password") String password,
-			@RequestParam("confirmPassword") String confirmPassword, @RequestParam("username") String username)
-			throws IllegalStateException, IOException {
+			@RequestParam("confirmPassword") String confirmPassword, @RequestParam("username") String username,
+			@RequestParam("photo") String photo) {
 
 		if (userService.findByUsername(username) != null) {
 			redir.addFlashAttribute("message", "Tên đăng nhập đã tồn tại!!!");
@@ -70,11 +68,9 @@ public class UserController {
 			redir.addFlashAttribute("message", "Mật khẩu không trùng khớp!!!");
 			return "redirect:/users";
 		}
-		// if (file.isEmpty()) {
-		// user.setPhoto("user.jpg");
-		// } else {
-		// user.setPhoto(file.getOriginalFilename());
-		// }
+		if (photo.isEmpty()) {
+			user.setPhoto("user.jpg");
+		}
 		redir.addFlashAttribute("message", "Tạo tài khoản thành công!!!");
 		userService.save(user);
 		return "redirect:/users";
@@ -82,8 +78,16 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/users/update", method = { RequestMethod.PUT, RequestMethod.GET })
-	public String update(User user) {
+	public String update(User user, @RequestParam("photo") String photo, @RequestParam("image") String image,
+			RedirectAttributes redir) {
+
+		if (photo.isEmpty()) {
+			user.setPhoto(image);
+			userService.save(user);
+			return "redirect:/users";
+		}
 		userService.save(user);
+		redir.addFlashAttribute("message", "Cập nhật thành công!!!");
 		return "redirect:/users";
 	}
 

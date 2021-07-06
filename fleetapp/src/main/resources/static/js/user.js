@@ -14,7 +14,7 @@ $('document').ready(function(){
 			$('#lastnameEdit').val(user.lastname);
 			$('#rolesEdit').val(user.roles);
 			$('#enabledEdit').val(user.enabled?'true':'false');
-			$('#fupImageEdit').val(user.photo);
+			$('#imageEdit').val(user.photo);
 		});					
 		$('#editModal').modal();
 	});

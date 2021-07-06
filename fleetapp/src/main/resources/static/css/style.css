@@ -327,8 +327,8 @@ table tr th { color: #688a7e;}
     border: none;
 
     border-radius: 0;
-
 }
+
 
 .login-form input[type="text"], .login-form input[type="password"] {
 
@@ -9265,13 +9265,17 @@ table.sliders tr td {
 }
 
 
+.bd-navbar {
+    min-height: 4rem;
+    background-color: #563d7c;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.05),inset 0 -1px 0 rgba(0,0,0,.1);
+}
 
 .twt-feed.blue-bg {
 
     background: #00a0df;
 
 }
-
 
 
 .twt-feed h1 {

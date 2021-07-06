@@ -84,8 +84,23 @@
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Create User</h5>
+				</div>
 				<div class="modal-body">
 					<form th:action="@{/users/addNew}" method="post">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="icon_profile"></i></span>
+							<input type="text" class="form-control" placeholder="Username"
+								name="username" id="username" autofocus>
+						</div>
+						
+						<div class="input-group">
+							<span class="input-group-addon"><i class="icon_key_alt"></i></span>
+							<input type="password" class="form-control"
+								placeholder="Password" id="password" name="password">
+						</div>
+
 						<div class="input-group">
 							<span class="input-group-addon"><i class="icon_profile"></i></span>
 							<input type="text" class="form-control" placeholder="Firstname"
@@ -99,39 +114,27 @@
 						</div>
 
 						<div class="input-group">
-							<span class="input-group-addon"><i class="icon_profile"></i></span>
-							<input type="text" class="form-control" placeholder="Username"
-								name="username" id="username" autofocus>
-						</div>
-
-						<div class="input-group">
-							<span class="input-group-addon"><i class="icon_key_alt"></i></span>
-							<input type="password" class="form-control"
-								placeholder="Password" id="password" name="password">
-						</div>
-
-						<div class="input-group">
 							<span class="input-group-addon"><i class="icon_key_alt"></i></span>
 							<input type="password" class="form-control"
 								placeholder="Confirm Password" id="confirmPassword" name="confirmPassword">
 						</div>
-						<div class="form-group">
-								<select class="form-control" id="roles" name="roles">
-									<option>-ROLE-</option>			    
-									<option>ADMIN</option>
-									<option>USER</option>
-								</select>
 
-								<select class="form-control" id="enabled" name="enabled">
-									<option>-ENABLED-</option>			    
-									<option value="true">ACTIVE</option>
+							<div class="form-group">
+								<select class="form-control" id="enabled" name="enabled">			    
+									<option value="true"  selected="selected">ACTIVE</option>
 									<option value="false">INACTIVE</option>
 								</select>
-						</div>
+
+								<select class="form-control" id="roles" name="roles">	    
+									<option>ADMIN</option>
+									<option  selected="selected">USER</option>
+								</select>
+							</div>
+
 						<div class="form-group row">
-							<label for="flpImageEdit" class="col-sm-4 col-form-label">Select Image: </label>
+							<label for="flpImageEdit" class="col-sm-4 col-form-label">AVATAR:</label>
 							<div class="col-sm-6">
-								<input type="file" class="form-control-file" id="fupImage" name="photo" placeholder="Select File">
+								<input type="file" class="form-control-file" id="photo" name="photo" placeholder="Select File">
 							</div>
 						</div>
 
@@ -185,10 +188,7 @@
 							<div class="form-group">
 								<label for="recipient-name" class="col-form-label">ROLE:</label>
 								<div class="form-group">
-
-									
 									<select class="form-control" id="rolesEdit" name="roles">
-										<option>-SELECT-</option>			    
 										<option>ADMIN</option>
 										<option>USER</option>
 									</select>				    
@@ -199,7 +199,6 @@
 								<label for="recipient-name" class="col-form-label">ENABLED:</label>
 								<div class="form-group">
 									<select class="form-control" id="enabledEdit" name="enabled">
-										<!-- <option>-SELECT-</option>			     -->
 										<option value="true">ACTIVE</option>
 										<option value="false">INACTIVE</option>
 									</select>				    
@@ -207,12 +206,12 @@
 							</div>
 
 							<div class="form-group row">
-								<label for="flpImageEdit" class="col-sm-4 col-form-label">Select Image: </label>
+								<label for="flpImageEdit" class="col-sm-4 col-form-label">AVATAR:</label>
 								<div class="col-sm-6">
-									<input type="file" class="form-control-file" id="fupImageEdit" name="photo" placeholder="Select File">
+									<input type="file" class="form-control-file" id="photoEdit" name="photo" placeholder="Select File">
 								</div>
 							</div>
-	
+							<input type="text" id="imageEdit" name="image" hidden>
 							<div class="form-group modal-footer">
 								<button type="submit" class="btn btn-primary">Update</button>
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
