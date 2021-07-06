@@ -18,6 +18,11 @@ public class UserPrincipal implements UserDetails {
 		this.user = user;
 	}
 
+	public String getPhoto() {
+		// TODO Auto-generated method stub
+		return user.getPhoto();
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return Collections.singleton(new SimpleGrantedAuthority(user.getRoles()));

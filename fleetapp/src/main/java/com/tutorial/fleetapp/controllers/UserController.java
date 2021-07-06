@@ -15,6 +15,7 @@ import com.tutorial.fleetapp.models.User;
 import com.tutorial.fleetapp.services.UserService;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.RequestParam;
 import com.tutorial.fleetapp.services.UserService;
 
 @Controller
@@ -51,8 +52,13 @@ public class UserController {
 	}
 
 	@PostMapping(value = "users/addNew")
-	public String addNew(User user) {
+	public String addNew(User user, RedirectAttributes redir, @RequestParam("password") String password,
+			@RequestParam("confirmPassword") String confirmPassword) {
 
+		if (!password.equals(confirmPassword)) {
+			redir.addFlashAttribute("message", "Mật khẩu không trùng khớp!");
+			return "redirect:/users";
+		}
 		userService.save(user);
 		return "redirect:/users";
 
