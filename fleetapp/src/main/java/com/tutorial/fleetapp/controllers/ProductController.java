@@ -29,6 +29,11 @@ public class ProductController {
 		return "/body/product";
 	}
 
+	@GetMapping("/producteditadd")
+	public String addProduct() {
+		return "/body/producteditadd";
+	}
+
 	@RequestMapping("products/findById")
 
 	@ResponseBody

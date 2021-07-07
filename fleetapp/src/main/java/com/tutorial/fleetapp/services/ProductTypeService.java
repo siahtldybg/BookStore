@@ -20,8 +20,8 @@ public class ProductTypeService {
     }
 
     // SAve new producttype
-    public void save(ProductType producttype) {
-        productTypeRepository.save(producttype);
+    public void save(ProductType productType) {
+        productTypeRepository.save(productType);
     }
 
     // get by id

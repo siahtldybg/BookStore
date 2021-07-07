@@ -23,8 +23,13 @@
 					<!-- page start-->
 					<div class="row">
 						<div class="col-lg-12">
+							<a th:href="@{/producteditadd}">
+								<button class="btn btn-primary" type="button">Add Product</button>
+							</a>
+
 							<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add
 								Country</button>
+
 							<table class="table table-striped table-advance table-hover">
 								<thead>
 									<tr>
@@ -76,7 +81,7 @@
 			</div>
 		</section>
 		<!-- container section end -->
-		<!-- <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 			aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -84,33 +89,118 @@
 						<h5 class="modal-title" id="exampleModalLabel">Add Country</h5>
 					</div>
 					<div class="modal-body">
-						<form th:action="@{/countries/addNew}" method="post">
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Continent:</label>
-								<input type="text" class="form-control" id="recipient-name" name="continent">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<form  th:action="@{/products/addNew}" method="post">
+									<div class="row">
+										<div class="form-group col-sm-6">
+											<label>ID:</label>
+											<input class="form-control" readonly="true" placeholder="Auto Number" />
+										</div>
+						
+										<div class="form-group col-sm-6">
+											<label>Giảm giá:</label>
+											<input name="discount" class="form-control" type="number"
+												required="required" min="0" oninput="validity.valid||(value='');"
+												step="0.05" />
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-sm-6">
+											<label>Tên sản phẩm:</label>
+											<input name="nameBook" class="form-control" required="required"
+												pattern=".{6,}" title="Tên sản phẩm phải từ 6 ký tự trở lên" />
+										</div>
+										<div class="form-group col-sm-6">
+											<label>Đơn giá:</label>
+											<input name="unitPrice" class="form-control" type="number"
+												required="required" min="0" />
+										</div>
+						
+									</div>
+									<div class="row">
+										<div class="form-group col-sm-6">
+											<label>Số lượng:</label>
+											<input name="quantity" class="form-control" type="number"
+												required="required" min="0" />
+										</div>
+										<div class="form-group col-sm-6">
+											<label>Loại:</label>
+											<select class="form-control" id="ddlProductTypeDetails" name="producttypeid">
+												<!-- <option>-SELECT-</option>			     -->
+												<option th:each="producttype : ${producttypes}"
+														th:value="${producttype.id}"
+														th:text="${producttype.category}">
+												</option>
+											</select>	
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-sm-6">
+											<label>Ngày thêm:</label>
+											<input id="hvn" name="productDate" class="form-control" />
+										</div>
+										<div class="form-group col-sm-6">
+											<label>Số lượng xem sản phẩm:</label>
+											<input name="viewCount" class="form-control" readonly="true" />
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6 form-group">
+											<label>Đặc biệt:</label>
+											<div class="row">
+												<div class="col-sm-3">
+													  <input type="radio" id="show" name="available" value="true" checked="checked">
+													  <label>Hiện sản phẩm</label>
+												</div>
+												<div class="col-sm-3">
+													  <input type="radio" id="notshow" name="available" value="false">
+													  <label>Ẩn sản phẩm</label><br>
+												</div>
+											</div>
+										</div>
+	
+										<div class="col-sm-6 form-group">
+											<label>Tình trạng hàng:</label>
+											<div class="row">
+												<div class="col-sm-2">
+													  <input type="radio" id="haveproduct" name="special" value="true" checked="checked">
+													  <label>Còn hàng</label>
+												</div>
+												<div class="col-sm-2">
+													  <input type="radio" id="nohaveproduct" name="special" value="false">
+													  <label>Hết hàng</label><br>
+												</div>
+											</div>
+										</div>
+						
+									</div>
+									<div class="row">
+									<div class="form-group col-sm-6">
+											<label>Tác giả:</label> 
+											<input name="author" class="form-control"
+												pattern=".{3,}" title="Tên tác giả phải từ 3 ký tự trở lên" />
+										</div>
+										<div class="form-group col-sm-6">
+											<label>Hình ảnh:</label> 
+											<input type="file" name="image_file" class="form-control" />
+											<!-- <form:hidden path="image" /> -->
+										</div>
+										
+									</div>
+									<div class="row">
+										<div class="form-group col-sm-12">
+											<label>Mô tả:</label>
+											<textarea id="description" name="description" class="form-control"></textarea>
+										</div>
+						
+										<div class="form-group col-sm-12">
+											<button type="submit" class="btn btn-primary">Submit</button>
+										</div>
+									</div>
+								</form>
 							</div>
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Description:</label>
-								<input type="text" class="form-control" id="recipient-name" name="description">
-							</div>
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Captital:</label>
-								<input type="text" class="form-control" id="recipient-name" name="capital">
-							</div>
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Code:</label>
-								<input type="text" class="form-control" id="recipient-name" name="code">
-							</div>
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Nationality:</label>
-								<input type="text" class="form-control" id="recipient-name" name="nationality">
-							</div>
-
+						</div>
 							<div class="form-group modal-footer">
 								<button type="submit" class="btn btn-primary">Submit</button>
 								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

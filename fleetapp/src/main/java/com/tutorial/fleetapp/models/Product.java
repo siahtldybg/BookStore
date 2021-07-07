@@ -38,7 +38,6 @@ public class Product {
     @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date productDate;
     private Boolean available;
-    // Integer categoryId;
     private Integer quantity;
     private String description;
     private Double discount;
@@ -46,9 +45,9 @@ public class Product {
     private Boolean special;
 
     @ManyToOne
-    @JoinColumn(name = "productTypedName", insertable = false, updatable = false)
+    @JoinColumn(name = "producttypeid", insertable = false, updatable = false)
     private ProductType productType;
-    private String productTypedName;
+    private Integer producttypeid;
 
     public Integer getId() {
         return id;
@@ -152,6 +151,14 @@ public class Product {
 
     public void setProductType(ProductType productType) {
         this.productType = productType;
+    }
+
+    public Integer getProducttypeid() {
+        return producttypeid;
+    }
+
+    public void setProducttypeid(Integer producttypeid) {
+        this.producttypeid = producttypeid;
     }
 
 }
