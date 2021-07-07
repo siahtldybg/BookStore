@@ -30,24 +30,25 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nameBook;
+    private String bookname;
     private String author;
-    private Double unitPrice;
+    private Double price;
     private String image;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "MM/dd/yyyy")
-    private Date productDate;
+    private Date date;
     private Boolean available;
     private Integer quantity;
     private String description;
     private Double discount;
-    private Integer viewCount;
-    private Boolean special;
+    private Integer count;
 
     @ManyToOne
     @JoinColumn(name = "producttypeid", insertable = false, updatable = false)
-    private ProductType productType;
+    private ProductType producttype;
     private Integer producttypeid;
+
+    private Boolean special;
 
     public Integer getId() {
         return id;
@@ -57,12 +58,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getNameBook() {
-        return nameBook;
+    public String getBookname() {
+        return bookname;
     }
 
-    public void setNameBook(String nameBook) {
-        this.nameBook = nameBook;
+    public void setBookname(String bookname) {
+        this.bookname = bookname;
     }
 
     public String getAuthor() {
@@ -73,12 +74,12 @@ public class Product {
         this.author = author;
     }
 
-    public Double getUnitPrice() {
-        return unitPrice;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setUnitPrice(Double unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getImage() {
@@ -89,12 +90,12 @@ public class Product {
         this.image = image;
     }
 
-    public Date getProductDate() {
-        return productDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setProductDate(Date productDate) {
-        this.productDate = productDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Boolean getAvailable() {
@@ -129,28 +130,20 @@ public class Product {
         this.discount = discount;
     }
 
-    public Integer getViewCount() {
-        return viewCount;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setViewCount(Integer viewCount) {
-        this.viewCount = viewCount;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
-    public Boolean getSpecial() {
-        return special;
+    public ProductType getProducttype() {
+        return producttype;
     }
 
-    public void setSpecial(Boolean special) {
-        this.special = special;
-    }
-
-    public ProductType getProductType() {
-        return productType;
-    }
-
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
+    public void setProducttype(ProductType producttype) {
+        this.producttype = producttype;
     }
 
     public Integer getProducttypeid() {
@@ -159,6 +152,14 @@ public class Product {
 
     public void setProducttypeid(Integer producttypeid) {
         this.producttypeid = producttypeid;
+    }
+
+    public Boolean getSpecial() {
+        return special;
+    }
+
+    public void setSpecial(Boolean special) {
+        this.special = special;
     }
 
 }

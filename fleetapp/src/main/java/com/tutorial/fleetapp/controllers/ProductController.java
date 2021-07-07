@@ -13,25 +13,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tutorial.fleetapp.models.Product;
+import com.tutorial.fleetapp.models.ProductType;
 import com.tutorial.fleetapp.services.ProductService;
+import com.tutorial.fleetapp.services.ProductTypeService;
 
 @Controller
 public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ProductTypeService productTypeService;
 
 	// Get All Countrys
 	@GetMapping("/products")
 	public String getProduct(Model model) {
 		List<Product> productList = productService.getProduct();
 		model.addAttribute("products", productList);
+
 		return "/body/product";
 	}
 
-	@GetMapping("/producteditadd")
-	public String addProduct() {
-		return "/body/producteditadd";
+	@GetMapping("/productadd")
+	public String addProduct(Model model) {
+		List<ProductType> productTypeList = productTypeService.getProductType();
+		model.addAttribute("producttypes", productTypeList);
+		return "/body/productadd";
 	}
 
 	@RequestMapping("products/findById")

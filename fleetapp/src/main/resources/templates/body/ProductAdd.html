@@ -29,7 +29,7 @@
 										<label>ID:</label>
 										<input class="form-control" readonly="true" placeholder="Auto Number" />
 									</div>
-					
+
 									<div class="form-group col-sm-6">
 										<label>Giảm giá:</label>
 										<input name="discount" class="form-control" type="number"
@@ -37,19 +37,20 @@
 											step="0.05" />
 									</div>
 								</div>
+
 								<div class="row">
 									<div class="form-group col-sm-6">
 										<label>Tên sản phẩm:</label>
-										<input name="nameBook" class="form-control" required="required"
+										<input name="bookname" class="form-control" required="required"
 											pattern=".{6,}" title="Tên sản phẩm phải từ 6 ký tự trở lên" />
 									</div>
 									<div class="form-group col-sm-6">
 										<label>Đơn giá:</label>
-										<input name="unitPrice" class="form-control" type="number"
+										<input name="price" class="form-control" type="number"
 											required="required" min="0" />
 									</div>
-					
 								</div>
+								
 								<div class="row">
 									<div class="form-group col-sm-6">
 										<label>Số lượng:</label>
@@ -59,7 +60,7 @@
 									<div class="form-group col-sm-6">
 										<label>Loại:</label>
 										<select class="form-control" id="ddlProductTypeDetails" name="producttypeid">
-											<!-- <option>-SELECT-</option>			     -->
+											<option>-SELECT-</option>			    
 											<option th:each="producttype : ${producttypes}"
 													th:value="${producttype.id}"
 													th:text="${producttype.category}">
@@ -67,6 +68,7 @@
 										</select>	
 									</div>
 								</div>
+
 								<div class="row">
 									<div class="form-group col-sm-6">
 										<label>Ngày thêm:</label>
@@ -74,18 +76,18 @@
 									</div>
 									<div class="form-group col-sm-6">
 										<label>Số lượng xem sản phẩm:</label>
-										<input name="viewCount" class="form-control" readonly="true" />
+										<input name="count" class="form-control" readonly="true" />
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-6 form-group">
 										<label>Đặc biệt:</label>
 										<div class="row">
-											<div class="col-sm-3">
+											<div class="col-sm-4">
 												  <input type="radio" id="show" name="available" value="true" checked="checked">
 												  <label>Hiện sản phẩm</label>
 											</div>
-											<div class="col-sm-3">
+											<div class="col-sm-4">
 												  <input type="radio" id="notshow" name="available" value="false">
 												  <label>Ẩn sản phẩm</label><br>
 											</div>
@@ -95,31 +97,32 @@
 									<div class="col-sm-6 form-group">
 										<label>Tình trạng hàng:</label>
 										<div class="row">
-											<div class="col-sm-2">
+											<div class="col-sm-4">
 												  <input type="radio" id="haveproduct" name="special" value="true" checked="checked">
 												  <label>Còn hàng</label>
 											</div>
-											<div class="col-sm-2">
+											<div class="col-sm-4">
 												  <input type="radio" id="nohaveproduct" name="special" value="false">
 												  <label>Hết hàng</label><br>
 											</div>
 										</div>
 									</div>
-					
 								</div>
+
 								<div class="row">
-								<div class="form-group col-sm-6">
+									<div class="form-group col-sm-6">
 										<label>Tác giả:</label> 
 										<input name="author" class="form-control"
 											pattern=".{3,}" title="Tên tác giả phải từ 3 ký tự trở lên" />
 									</div>
+
 									<div class="form-group col-sm-6">
 										<label>Hình ảnh:</label> 
-										<input type="file" name="image_file" class="form-control" />
+										<input type="file" name="image" class="form-control" />
 										<!-- <form:hidden path="image" /> -->
 									</div>
-									
 								</div>
+
 								<div class="row">
 									<div class="form-group col-sm-12">
 										<label>Mô tả:</label>

@@ -28,18 +28,18 @@ public class ProductTypeController {
 		return "/body/producttype";
 	}
 
-	@RequestMapping("producttypes/findById")
-
-	@ResponseBody
-	public Optional<ProductType> findById(Integer id) {
-		return productTypeService.findById(id);
-	}
-
 	// Add Country
 	@PostMapping(value = "producttypes/addNew")
 	public String addNew(ProductType productType) {
 		productTypeService.save(productType);
 		return "redirect:/producttypes";
+	}
+
+	@RequestMapping("producttypes/findById")
+
+	@ResponseBody
+	public Optional<ProductType> findById(Integer id) {
+		return productTypeService.findById(id);
 	}
 
 	@RequestMapping(value = "producttypes/update", method = { RequestMethod.PUT, RequestMethod.GET })

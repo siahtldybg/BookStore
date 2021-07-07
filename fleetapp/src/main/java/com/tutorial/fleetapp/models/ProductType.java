@@ -16,16 +16,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-// property = "id")
 public class ProductType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String type;
     private String category;
-
-    @OneToMany(mappedBy = "producttypeid")
+    @OneToMany(mappedBy = "producttype")
     private List<Product> product;
 
     public Integer getId() {
