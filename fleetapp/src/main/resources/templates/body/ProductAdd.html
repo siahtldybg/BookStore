@@ -59,8 +59,8 @@
 									</div>
 									<div class="form-group col-sm-6">
 										<label>Loại:</label>
-										<select class="form-control" id="ddlProductTypeDetails" name="producttypeid">
-											<option>-SELECT-</option>			    
+										<select class="form-control" id="ddlProductTypeDetails" name="producttypeid" required="required">
+											<option  value="">-SELECT-</option>			    
 											<option th:each="producttype : ${producttypes}"
 													th:value="${producttype.id}"
 													th:text="${producttype.category}">
@@ -72,7 +72,7 @@
 								<div class="row">
 									<div class="form-group col-sm-6">
 										<label>Ngày thêm:</label>
-										<input id="hvn" name="productDate" class="form-control" />
+										<input type="date" id="hvn" name="productDate" class="form-control" />
 									</div>
 									<div class="form-group col-sm-6">
 										<label>Số lượng xem sản phẩm:</label>
@@ -97,6 +97,7 @@
 									<div class="col-sm-6 form-group">
 										<label>Tình trạng hàng:</label>
 										<div class="row">
+											
 											<div class="col-sm-4">
 												  <input type="radio" id="haveproduct" name="special" value="true" checked="checked">
 												  <label>Còn hàng</label>
@@ -139,138 +140,7 @@
 					<!-- page end-->
 				</section>
 			</section>
-			<!--main content end-->
-			<div class="text-right">
-				<div class="credits">
-					<!--
-				All the links in the footer should remain intact.
-				You can delete the links only if you purchased the pro version.
-				Licensing information: https://bootstrapmade.com/license/
-				Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
-			-->
-				</div>
-			</div>
 		</section>
-		<script src="ckeditor/ckeditor.js"></script>
-		<script>
-			$(document).ready(function() {
-				var editor = '';
-				editor = CKEDITOR.replace('description');
-	
-			});
-		</script>
 		<!-- container section end -->
-		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-			aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Add Country</h5>
-					</div>
-					<div class="modal-body">
-						<form th:action="@{/countries/addNew}" method="post">
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Continent:</label>
-								<input type="text" class="form-control" id="recipient-name" name="continent">
-							</div>
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Description:</label>
-								<input type="text" class="form-control" id="recipient-name" name="description">
-							</div>
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Captital:</label>
-								<input type="text" class="form-control" id="recipient-name" name="capital">
-							</div>
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Code:</label>
-								<input type="text" class="form-control" id="recipient-name" name="code">
-							</div>
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Nationality:</label>
-								<input type="text" class="form-control" id="recipient-name" name="nationality">
-							</div>
-
-							<div class="form-group modal-footer">
-								<button type="submit" class="btn btn-primary">Submit</button>
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-			aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Update Country</h5>
-					</div>
-					<div class="modal-body">
-						<form th:action="@{/countries/update}" method="put">
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Id:</label>
-								<input type="text" class="form-control" id="idEdit" name="id" readonly>
-							</div>
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Continent:</label>
-								<input type="text" class="form-control" id="continentEdit" name="continent">
-							</div>
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Description:</label>
-								<input type="text" class="form-control" id="descriptionEdit" name="description">
-							</div>
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Capital:</label>
-								<input type="text" class="form-control" id="capitalEdit" name="capital">
-							</div>
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Code:</label>
-								<input type="text" class="form-control" id="codeEdit" name="code">
-							</div>
-
-							<div class="form-group">
-								<label for="recipient-name" class="col-form-label">Nationality:</label>
-								<input type="text" class="form-control" id="nationalityEdit" name="nationality">
-							</div>
-
-							<div class="form-group modal-footer">
-								<button type="submit" class="btn btn-primary">Update</button>
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="modal" id="deleteModal" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Confirm Delete</h5>
-					</div>
-					<div class="modal-body">
-						<p>Bạn có chắc là muốn xóa bản ghi này?</p>
-					</div>
-					<div class="modal-footer">
-						<a class="btn btn-primary" id="confirmDeleteButton" href="">Yes, Delete</a>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
 	</th:block>
 </html>

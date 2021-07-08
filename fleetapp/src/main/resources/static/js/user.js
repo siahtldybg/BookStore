@@ -1,7 +1,7 @@
 
 $('document').ready(function(){
 	
-	$('table #editButton').on('click',function(event){
+	$('table #editUserButton').on('click',function(event){
 		event.preventDefault();
 			
 		let href = $(this).attr('href');
@@ -16,17 +16,17 @@ $('document').ready(function(){
 			$('#enabledEdit').val(user.enabled?'true':'false');
 			$('#imageEdit').val(user.photo);
 		});					
-		$('#editModal').modal();
+		$('#editUserModal').modal();
 	});
 
-	$('table #deleteButton').on('click', function(event){
+	$('table #deleteUserButton').on('click', function(event){
 		event.preventDefault();
 		
 		let href= $(this).attr('href');
 		
 		$('#confirmDeleteButton').attr('href', href);
 		
-		$('#deleteModal').modal();
+		$('#deleteUserModal').modal();
 	});
 
 	$('.table #photoButton').on('click',function(event) {
