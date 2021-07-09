@@ -64,6 +64,7 @@
 											<option th:each="producttype : ${producttypes}"
 													th:value="${producttype.id}"
 													th:text="${producttype.category}">
+													
 											</option>
 										</select>	
 									</div>
@@ -72,7 +73,7 @@
 								<div class="row">
 									<div class="form-group col-sm-6">
 										<label>Ngày thêm:</label>
-										<input type="date" id="hvn" name="productDate" class="form-control" />
+										<input type="date" id="hvn" name="date" class="form-control" />
 									</div>
 									<div class="form-group col-sm-6">
 										<label>Số lượng xem sản phẩm:</label>
@@ -81,31 +82,24 @@
 								</div>
 								<div class="row">
 									<div class="col-sm-6 form-group">
-										<label>Đặc biệt:</label>
-										<div class="row">
-											<div class="col-sm-4">
-												  <input type="radio" id="show" name="available" value="true" checked="checked">
-												  <label>Hiện sản phẩm</label>
-											</div>
-											<div class="col-sm-4">
-												  <input type="radio" id="notshow" name="available" value="false">
-												  <label>Ẩn sản phẩm</label><br>
-											</div>
+										<label>Hiển thị:</label>
+										<div class="form-group">
+											<select class="form-control" id="availableProduct" name="available" required="required">
+												<option value="">-SELECT-</option>			    
+												<option value="true" style="color: green;">Hiện sản phẩm</option>
+												<option value="false" style="color: red;">Ẩn sản phẩm</option>
+											</select>				    
 										</div>
 									</div>
 
 									<div class="col-sm-6 form-group">
 										<label>Tình trạng hàng:</label>
-										<div class="row">
-											
-											<div class="col-sm-4">
-												  <input type="radio" id="haveproduct" name="special" value="true" checked="checked">
-												  <label>Còn hàng</label>
-											</div>
-											<div class="col-sm-4">
-												  <input type="radio" id="nohaveproduct" name="special" value="false">
-												  <label>Hết hàng</label><br>
-											</div>
+										<div class="form-group">
+											<select class="form-control" id="specialProduct " name="special" required="required">
+												<option value="">-SELECT-</option>			    
+												<option value="true" style="color: green;">Còn hàng</option>
+												<option value="false" style="color: red;">Hết hàng</option>
+											</select>				    
 										</div>
 									</div>
 								</div>

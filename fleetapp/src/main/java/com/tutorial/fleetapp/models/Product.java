@@ -35,7 +35,7 @@ public class Product {
     private Double price;
     private String image;
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     private Boolean available;
     private Integer quantity;

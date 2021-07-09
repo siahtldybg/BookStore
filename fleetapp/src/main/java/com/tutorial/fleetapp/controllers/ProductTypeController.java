@@ -38,7 +38,9 @@ public class ProductTypeController {
 	@RequestMapping("producttypes/findById")
 
 	@ResponseBody
-	public Optional<ProductType> findById(Integer id) {
+	public Optional<ProductType> findById(Integer id, Model model) {
+		List<ProductType> productTypeList = productTypeService.getProductType();
+		model.addAttribute("producttypes", productTypeList);
 		return productTypeService.findById(id);
 	}
 

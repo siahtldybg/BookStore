@@ -38,27 +38,41 @@
 										<th>GIÁ TIỀN</th>
 										<th>TÁC GIẢ</th>
 										<th>SỐ LƯỢNG</th>
+										<th>TÌNH TRẠNG</th>
+										<th>HIỂN THỊ</th>
 										<th>ACTIONS</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr th:each="product:${products}">
 										<td>
-											<a id="photoButton" th:href="@{'/img/photos/' + ${product.image} }">
-												<img th:src="@{'/img/photos/' + ${product.image}}" width="50" height="60">
+											<a id="photoButton" th:href="@{'/img/product/' + ${product.image} }">
+												<img th:src="@{'/img/product/' + ${product.image}}" width="50" height="60">
 											</a>
 										</td>
 										<td th:text="${product.id}"></td>
 										<td th:text="${product.bookname}"></td>
-										<td th:text="${product.producttypeid}"></td>
+										<td th:text="${product.producttype.category}"></td>
 										<td th:text="${product.date}"></td>
 										<td th:text="${product.price}"></td>
 										<td th:text="${product.author}"></td>
 										<td th:text="${product.quantity}"></td>
+										<!-- <td th:text="${product.special}"></td>
+										<td th:text="${product.available}"></td> -->
+
+
+										<td th:switch="${product.special}" >
+											<p th:case="true" style="color: green; font-weight: bolder;">Còn hàng</p>
+											<p th:case="false" style="color: red; font-weight: bolder;">Hết hàng</p>
+										</td>
+										<td th:switch="${product.available}">
+											<p th:case="true" style="color: green; font-weight: bolder;">Hiện</p>
+											<p th:case="false" style="color: red; font-weight: bolder;">Ẩn</p>
+										</td> 
 										<td>
 											<div class="btn-group">
 												<a th:href="@{/products/findById/(id=${product.id})}"
-													class="btn btn-primary" id="editButton"><i
+													class="btn btn-primary" id="editProductButton"><i
 													class="icon_pencil-edit"></i></a>  
 	
 												<a th:href="@{/products/delete/(id=${product.id})}"
@@ -75,52 +89,6 @@
 				</section>
 			</section>
 			<!--main content end-->
-			<div class="text-right">
-				<div class="credits">
-					<!--
-				All the links in the footer should remain intact.
-				You can delete the links only if you purchased the pro version.
-				Licensing information: https://bootstrapmade.com/license/
-				Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
-			-->
-				</div>
-			</div>
-		</section>
-		<!-- container section end -->
-
-		<div class="modal" id="deleteModal" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Confirm Delete</h5>
-					</div>
-					<div class="modal-body">
-						<p>Bạn có chắc là muốn xóa bản ghi này?</p>
-					</div>
-					<div class="modal-footer">
-						<a class="btn btn-primary" id="confirmDeleteButton" href="">Yes, Delete</a>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-					</div>
-				</div>
-			</div>
-		</div> 
-
-		<div class="modal fade" tabindex="-1" role="dialog" id="photoModal">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title">Photo</h5>
-					</div>
-				<div class="modal-body" style="text-align: center;">
-					<img id="employeePhoto" src="" width="70%" height="70%">
-				</div>
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-			</div>
-		</div> 
 
 
 	</th:block>

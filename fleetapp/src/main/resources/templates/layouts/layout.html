@@ -337,6 +337,120 @@
 	</div>
 	</div>
 
+	<div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Update Product</h5>
+			</div>
+			<div class="modal-body">
+				<form  th:action="@{/products/update}" method="put">
+					<div class="row">
+						<div class="form-group col-sm-6">
+							<label>ID:</label>
+							<input id="idProduct" name="id" class="form-control" readonly="true" placeholder="Auto Number" />
+						</div>
+		
+						<div class="form-group col-sm-6">
+							<label>Giảm giá:</label>
+							<input id="discountProduct" name="discount" class="form-control" type="number"
+								required="required" min="0" oninput="validity.valid||(value='');"
+								step="0.05" />
+						</div>
+					</div>
+		
+					<div class="row">
+						<div class="form-group col-sm-6">
+							<label>Tên sản phẩm:</label>
+							<input id="booknameProduct" name="bookname" class="form-control" required="required"
+								pattern=".{6,}" title="Tên sản phẩm phải từ 6 ký tự trở lên" />
+						</div>
+						<div class="form-group col-sm-6">
+							<label>Đơn giá:</label>
+							<input id="priceProduct" name="price" class="form-control" type="number"
+								required="required" min="0" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="form-group col-sm-6">
+							<label>Số lượng:</label>
+							<input id="quantityProduct" name="quantity" class="form-control" type="number"
+								required="required" min="0" />
+						</div>
+						<div class="form-group col-sm-6">
+							<label>Loại:</label>
+							<!-- <input type="text"  id="typeProduct" name="producttypeid"> -->
+							<select class="form-control" name="producttypeid" required="required" id="typeProduct">
+								<option th:each="producttype : ${producttypes}"
+										th:value="${producttype.id}"
+										th:text="${producttype.category}">
+								</option>
+							</select>	
+						</div>
+					</div>
+		
+					<div class="row">
+						<div class="form-group col-sm-6">
+							<label>Ngày thêm:</label>
+							<input type="date" id="dateProduct" name="date" class="form-control" />
+						</div>
+						<div class="form-group col-sm-6">
+							<label>Số lượng xem sản phẩm:</label>
+							<input name="count" class="form-control" readonly="true" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6 form-group">
+							<label>Đặc biệt:</label>
+							<div class="form-group">
+								<select class="form-control" id="availableProduct" name="available">
+									<option value="true" style="color: green;">Hiện sản phẩm</option>
+									<option value="false" style="color: red;">Ẩn sản phẩm</option>
+								</select>				    
+							</div>
+						</div>
+		
+						<div class="col-sm-6 form-group">
+							<label>Tình trạng hàng:</label>
+							<div class="form-group">
+								<select class="form-control" id="specialProduct" name="special">
+									<option value="true" style="color: green;">Còn hàng</option>
+									<option value="false" style="color: red;">Hết hàng</option>
+								</select>				    
+							</div>
+						</div>
+					</div>
+		
+					<div class="row">
+						<div class="form-group col-sm-6">
+							<label>Tác giả:</label> 
+							<input id="authorProduct" name="author" class="form-control"
+								pattern=".{3,}" title="Tên tác giả phải từ 3 ký tự trở lên" />
+						</div>
+		
+						<div class="form-group col-sm-6">
+							<label>Hình ảnh:</label> 
+							<input type="file" name="image" class="form-control" />
+							<input type="text" id="imageProduct" name="photo" hidden>
+						</div>
+					</div>
+		
+					<div class="row">
+						<div class="form-group col-sm-12">
+							<label>Mô tả:</label>
+							<textarea id="descriptionProduct" name="description" class="form-control"></textarea>
+						</div>
+		
+						<div class="form-group col-sm-12">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
 
 
 
@@ -360,6 +474,7 @@
 	<script src="js/user.js"></script>
 	<script src="js/country.js"></script>
 	<script src="js/producttype.js"></script>
+	<script src="js/product.js"></script>
 
 	<!-- javascripts table -->
 	<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
