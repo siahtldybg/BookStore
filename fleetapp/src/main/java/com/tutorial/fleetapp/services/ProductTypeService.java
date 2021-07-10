@@ -29,6 +29,10 @@ public class ProductTypeService {
         return productTypeRepository.findById(id);
     }
 
+    public ProductType findByCategory(String category) {
+		return productTypeRepository.findByCategory(category);
+    }
+    
     public void delete(Integer id) {
         productTypeRepository.deleteById(id);
     }

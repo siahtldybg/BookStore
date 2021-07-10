@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.tutorial.fleetapp.models.ProductType;
 import com.tutorial.fleetapp.services.ProductTypeService;
 
@@ -30,7 +33,11 @@ public class ProductTypeController {
 
 	// Add Country
 	@PostMapping(value = "producttypes/addNew")
-	public String addNew(ProductType productType) {
+	public String addNew(ProductType productType, @RequestParam("category") String category, RedirectAttributes redir) {
+		if (productTypeService.findByCategory(category) != null) {
+			redir.addFlashAttribute("message", "Không được đặt trùng tên thể loại!!!");
+			return "redirect:/producttypes";
+		}
 		productTypeService.save(productType);
 		return "redirect:/producttypes";
 	}
@@ -45,7 +52,11 @@ public class ProductTypeController {
 	}
 
 	@RequestMapping(value = "producttypes/update", method = { RequestMethod.PUT, RequestMethod.GET })
-	public String update(ProductType productType) {
+	public String update(ProductType productType, @RequestParam("category") String category, RedirectAttributes redir) {
+		if (productTypeService.findByCategory(category) != null) {
+			redir.addFlashAttribute("message", "Không được đặt trùng tên thể loại!!!");
+			return "redirect:/producttypes";
+		}
 		productTypeService.save(productType);
 		return "redirect:/producttypes";
 	}

@@ -12,24 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import com.tutorial.fleetapp.models.User;
-import com.tutorial.fleetapp.models.UserPrincipal;
-import com.tutorial.fleetapp.repositories.UserRepository;
 import com.tutorial.fleetapp.services.UserService;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
-
-import com.tutorial.fleetapp.services.UserService;
 
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserService userService;
-
-	private UserRepository userRepository;
 
 	@GetMapping("/users")
 	public String getUsers(Model model) {
@@ -47,12 +39,22 @@ public class UserController {
 
 	// Modified method to Add a new user User
 	@PostMapping(value = "/register/addNew")
-	public RedirectView addNew(User user, RedirectAttributes redir) {
+	public String addNew(User user, RedirectAttributes redir, @RequestParam("password") String password,
+			@RequestParam("confirmPassword") String confirmPassword, @RequestParam("username") String username) {
+
+		if (userService.findByUsername(username) != null) {
+			redir.addFlashAttribute("message", "Tên đăng nhập đã tồn tại!!!");
+			return "redirect:/register";
+		}
+		if (!password.equals(confirmPassword)) {
+			redir.addFlashAttribute("message", "Mật khẩu không trùng khớp!!!");
+			return "redirect:/register";
+		}
 		user.setPhoto("user.jpg");
 		userService.save(user);
-		RedirectView redirectView = new RedirectView("/login", true);
-		redir.addFlashAttribute("message", "You successfully registered! You can now login");
-		return redirectView;
+		// RedirectView redirectView = new RedirectView("/login", true);
+		redir.addFlashAttribute("message", "Tạo tài khoản thành công!!!");
+		return "redirect:/login";
 	}
 
 	@PostMapping(value = "users/addNew")
