@@ -1,11 +1,7 @@
 package com.tutorial.fleetapp.models;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +17,11 @@ public class UserPrincipal implements UserDetails {
 	public String getPhoto() {
 		// TODO Auto-generated method stub
 		return user.getPhoto();
+	}
+
+	public int getId() {
+		// TODO Auto-generated method stub
+		return user.getId();
 	}
 
 	@Override

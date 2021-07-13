@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @EnableWebSecurity
 @Configuration
@@ -24,7 +23,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().authorizeRequests()
 				.antMatchers("/login", "/resources/**", "/css/**", "/fonts/**", "/img/**").permitAll()
 				.antMatchers("/register/**", "/resources/**", "/css/**", "/fonts/**", "/img/**", "/js/**").permitAll()
-
 				.antMatchers("/").hasAnyAuthority("USER", "ADMIN").antMatchers("/users").hasAuthority("ADMIN")
 				.antMatchers("/countries").hasAnyAuthority("USER", "ADMIN").antMatchers("/countries/**")
 				.hasAuthority("ADMIN")

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 import com.tutorial.fleetapp.models.User;
 import com.tutorial.fleetapp.services.UserService;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,7 +26,7 @@ public class UserController {
 	public String getUsers(Model model) {
 		List<User> userlist = userService.getUsers();
 		model.addAttribute("users", userlist);
-		return "/body/User";
+		return "body/User";
 	}
 
 	@RequestMapping("users/findById")
@@ -98,4 +97,5 @@ public class UserController {
 		userService.delete(id);
 		return "redirect:/users";
 	}
+
 }

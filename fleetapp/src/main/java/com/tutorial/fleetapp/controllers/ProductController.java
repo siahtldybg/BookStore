@@ -33,7 +33,7 @@ public class ProductController {
 
 		List<ProductType> productTypeList = productTypeService.getProductType();
 		model.addAttribute("producttypes", productTypeList);
-		return "/body/product";
+		return "body/product";
 	}
 
 	@RequestMapping("products/findById")

@@ -28,7 +28,7 @@ public class ProductTypeController {
 	public String getProductType(Model model) {
 		List<ProductType> productTypeList = productTypeService.getProductType();
 		model.addAttribute("producttypes", productTypeList);
-		return "/body/producttype";
+		return "body/producttype";
 	}
 
 	// Add Country
@@ -52,11 +52,12 @@ public class ProductTypeController {
 	}
 
 	@RequestMapping(value = "producttypes/update", method = { RequestMethod.PUT, RequestMethod.GET })
-	public String update(ProductType productType, @RequestParam("category") String category, RedirectAttributes redir) {
+	public String update(ProductType productType, @RequestParam("category") String category,  @RequestParam("type") String type, RedirectAttributes redir) {
 		if (productTypeService.findByCategory(category) != null) {
 			redir.addFlashAttribute("message", "Không được đặt trùng tên thể loại!!!");
 			return "redirect:/producttypes";
 		}
+		//Ở đây cần thêm code
 		productTypeService.save(productType);
 		return "redirect:/producttypes";
 	}

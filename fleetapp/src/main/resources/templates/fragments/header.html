@@ -11,24 +11,24 @@
         <!--logo start-->
         <a href="index.html" class="logo">Book<span class="lite">Management</span></a>
         <!--logo end-->
-        <div class="nav search-row" id="top_menu">
+        <!-- <div class="nav search-row" id="top_menu"> -->
           <!--  search form start -->
-          <ul class="nav top-menu">
+          <!-- <ul class="nav top-menu">
             <li>
               <form class="navbar-form">
                 <input class="form-control" placeholder="Search" type="text">
               </form>
             </li>
-          </ul>
+          </ul> -->
           <!--  search form end -->
-        </div>
+        <!-- </div> -->
   
         <div class="top-nav notification-row">
           <!-- notificatoin dropdown start-->
           <ul class="nav pull-right top-menu">
   
             <!-- task notificatoin start -->
-            <li id="task_notificatoin_bar" class="dropdown">
+            <!-- <li id="task_notificatoin_bar" class="dropdown">
               <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                               <i class="icon-task-l"></i>
                               <span class="badge bg-important">6</span>
@@ -110,10 +110,10 @@
                   <a href="#">See All Tasks</a>
                 </li>
               </ul>
-            </li>
+            </li> -->
             <!-- task notificatoin end -->
             <!-- inbox notificatoin start-->
-            <li id="mail_notificatoin_bar" class="dropdown">
+            <!-- <li id="mail_notificatoin_bar" class="dropdown">
               <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                               <i class="icon-envelope-l"></i>
                               <span class="badge bg-important">5</span>
@@ -175,10 +175,10 @@
                   <a href="#">See all messages</a>
                 </li>
               </ul>
-            </li>
+            </li> -->
             <!-- inbox notificatoin end -->
             <!-- alert notification start-->
-            <li id="alert_notificatoin_bar" class="dropdown">
+            <!-- <li id="alert_notificatoin_bar" class="dropdown">
               <a data-toggle="dropdown" class="dropdown-toggle" href="#">
   
                               <i class="icon-bell-l"></i>
@@ -221,26 +221,28 @@
                   <a href="#">See all notifications</a>
                 </li>
               </ul>
-            </li>
+            </li> -->
             <!-- alert notification end-->
             <!-- user login dropdown start-->
 
 
             <li class="dropdown">
               <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                              <span class="profile-ava">
-                                <img alt="" th:src="@{'/img/photos/' + ${#authentication.getPrincipal().getPhoto()}}" height="38" width="38">
-                              </span>
-                              <span class="username" th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
-                              <b class="caret"></b>
-                          </a>
+                  <span class="profile-ava">
+                    <img alt="" th:src="@{'/img/photos/' + ${#authentication.getPrincipal().getPhoto()}}" height="38" width="38">
+                  </span>
+                  <span class="username" th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
+                  <b class="caret"></b>
+              </a>
               <ul class="dropdown-menu extended logout">
                 <div class="log-arrow-up"></div>
                 <li class="eborder-top">
-                  <a href="#"><i class="icon_profile"></i> My Profile</a>
+                  <a th:href="@{/users/findById/(id=${#authentication.getPrincipal().getId()})}" >
+                    <i class="icon_profile"></i> My Profile
+                  </a>
                 </li>
                 <li>
-                  <a href="#"><i class="icon_mail_alt"></i> My Inbox</a>
+                  <a ><i class="icon_mail_alt"></i> My Inbox</a>
                 </li>
                 <li>
                   <a href="#"><i class="icon_clock_alt"></i> Timeline</a>
