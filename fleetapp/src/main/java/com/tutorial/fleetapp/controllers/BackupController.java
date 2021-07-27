@@ -32,7 +32,7 @@ public class BackupController {
 	public String getBackup(RedirectAttributes model) {
 		List<Product> productList = productService.getProduct();
 		model.addAttribute("products", productList);
-		return "body/backup";
+		return "admin/body/backup";
 	}
 
 	@PostMapping(value = "backup/Add")

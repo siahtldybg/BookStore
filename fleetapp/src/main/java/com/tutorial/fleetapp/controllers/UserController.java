@@ -26,7 +26,7 @@ public class UserController {
 	public String getUsers(Model model) {
 		List<User> userlist = userService.getUsers();
 		model.addAttribute("users", userlist);
-		return "body/User";
+		return "/admin/body/User";
 	}
 
 	@RequestMapping("users/findById")

@@ -3,6 +3,8 @@ package com.tutorial.fleetapp.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,18 +14,70 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.tutorial.fleetapp.models.Comment;
+import com.tutorial.fleetapp.models.User;
+
 import com.tutorial.fleetapp.models.Product;
 import com.tutorial.fleetapp.models.ProductType;
+import com.tutorial.fleetapp.services.CommentService;
 import com.tutorial.fleetapp.services.ProductService;
 import com.tutorial.fleetapp.services.ProductTypeService;
+import com.tutorial.fleetapp.services.UserService;
 
 @Controller
 public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private CommentService commentService;
+
 	@Autowired
 	private ProductTypeService productTypeService;
+
+	@GetMapping("/productlist")
+	public String getProductView(Model model) {
+		List<Product> productList = productService.getProduct();
+		model.addAttribute("products", productList);
+
+		List<ProductType> productTypeList = productTypeService.getProductType();
+		model.addAttribute("producttypes", productTypeList);
+		return "user/body/product/Product_list";
+	}
+
+	
+	@RequestMapping("product/detail")
+	public String getProductDetail(Model model,@PathParam("id") Integer id) {
+
+		Optional<Product> product1 = productService.findById(id);
+		//Trả về object sản phẩm
+		Product product = product1.get();
+		model.addAttribute("product",product);
+
+		// Trả về mảng sản phẩm
+		List<Product> productList = productService.getProduct();
+		model.addAttribute("products", productList);
+
+		// Trả về mảng người dùng
+		List<User> userlist = userService.getUsers();
+		model.addAttribute("users", userlist);
+
+		// Trả về mảng comment theo id sản phẩm
+		List<Comment> commentList = product.getComments();
+		model.addAttribute("comments", commentList);
+
+		// Trả về mảng loại sản phẩm
+		List<ProductType> productTypeList = productTypeService.getProductType();
+		model.addAttribute("producttypes", productTypeList);
+
+		return "user/body/product/Product_Detail";
+	}
+	
 
 	// Get All Countrys
 	@GetMapping("/products")
@@ -33,8 +87,9 @@ public class ProductController {
 
 		List<ProductType> productTypeList = productTypeService.getProductType();
 		model.addAttribute("producttypes", productTypeList);
-		return "body/product";
+		return "admin/body/product";
 	}
+	
 
 	@RequestMapping("products/findById")
 	@ResponseBody
@@ -47,7 +102,7 @@ public class ProductController {
 		List<ProductType> productTypeList = productTypeService.getProductType();
 		model.addAttribute("producttypes", productTypeList);
 
-		return "/body/productadd";
+		return "admin/body/productadd";
 	}
 
 	// Add Country

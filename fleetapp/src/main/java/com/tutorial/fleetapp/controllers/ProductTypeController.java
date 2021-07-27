@@ -28,7 +28,7 @@ public class ProductTypeController {
 	public String getProductType(Model model) {
 		List<ProductType> productTypeList = productTypeService.getProductType();
 		model.addAttribute("producttypes", productTypeList);
-		return "body/producttype";
+		return "admin/body/producttype";
 	}
 
 	// Add Country
