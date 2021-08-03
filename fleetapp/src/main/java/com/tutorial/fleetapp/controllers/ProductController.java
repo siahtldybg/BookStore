@@ -39,47 +39,51 @@ public class ProductController {
 
 	@Autowired
 	private ProductTypeService productTypeService;
-
+	
+	
+	//USER
 	@GetMapping("/productlist")
 	public String getProductView(Model model) {
-		List<Product> productList = productService.getProduct();
+    	List<Product> productList = productService.getProduct();
 		model.addAttribute("products", productList);
-
 		List<ProductType> productTypeList = productTypeService.getProductType();
 		model.addAttribute("producttypes", productTypeList);
 		return "user/body/product/Product_list";
 	}
 
-	
 	@RequestMapping("product/detail")
 	public String getProductDetail(Model model,@PathParam("id") Integer id) {
-
 		Optional<Product> product1 = productService.findById(id);
 		//Trả về object sản phẩm
 		Product product = product1.get();
 		model.addAttribute("product",product);
-
 		// Trả về mảng sản phẩm
 		List<Product> productList = productService.getProduct();
 		model.addAttribute("products", productList);
-
 		// Trả về mảng người dùng
 		List<User> userlist = userService.getUsers();
 		model.addAttribute("users", userlist);
-
 		// Trả về mảng comment theo id sản phẩm
 		List<Comment> commentList = product.getComments();
 		model.addAttribute("comments", commentList);
-
 		// Trả về mảng loại sản phẩm
 		List<ProductType> productTypeList = productTypeService.getProductType();
 		model.addAttribute("producttypes", productTypeList);
-
 		return "user/body/product/Product_Detail";
 	}
 	
-
-	// Get All Countrys
+	@PostMapping("/SearchKeywords")
+	public String SearchKeywords(Model model,  @RequestParam("keywords") String keywords) {
+		List<Product> productList = productService.findByKeywords(keywords);
+		model.addAttribute("products", productList);
+		List<ProductType> productTypeList = productTypeService.getProductType();
+		model.addAttribute("producttypes", productTypeList);
+		return "user/body/product/Product_list";
+	}
+	
+	
+	
+	//ADMIN
 	@GetMapping("/products")
 	public String getProduct(Model model) {
 		List<Product> productList = productService.getProduct();
@@ -90,7 +94,6 @@ public class ProductController {
 		return "admin/body/product";
 	}
 	
-
 	@RequestMapping("products/findById")
 	@ResponseBody
 	public Optional<Product> findById(Integer id) {
@@ -105,7 +108,6 @@ public class ProductController {
 		return "admin/body/productadd";
 	}
 
-	// Add Country
 	@PostMapping(value = "products/addNew")
 	public String addNew(Product product) {
 		productService.save(product);

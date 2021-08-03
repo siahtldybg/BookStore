@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 layout:decorate="~{user/layouts/layout}"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body>
 	<th:block layout:fragment="content">
 	<div class="row"  th:object="${product}" style="margin-top: 20px;">
@@ -227,11 +227,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 				</div>
 			</div>
 			
-			
 			<div id="tab2" class="tab-pane fade">
 				<div class="gia-soc1" style="margin-top: 30px;">
 					<div class="row" style="padding: 20px; margin-top: -10px; height: auto; justify-content: center;">
-						<th:block th:each="i: ${#numbers.sequence(0, 3)}" th:with="product=${products[i]}">
+						<th:block th:each="i: ${#numbers.sequence(0, 1)}" th:with="product=${products[i]}">
 							<div class="col-sm-3">
 								<div class="card-group">
 									<div class="card ">

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<!-- xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" -->>
 <head>
 <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
@@ -7,6 +8,7 @@
 
 </head>
 <body>
+<!-- <div sec:authorize="isAuthenticated()"> Authenticated as <span sec:authentication="name"></span></div> -->
 	<div th:fragment="header">
 		<header class="header">
 			<div class="">
@@ -27,52 +29,61 @@
 							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 								class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="#">Book Store</a>
+						<a class="navbar-brand" href="/">Book Store</a>
+
 					</div>
 
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav ">
-							<li>
-								<form class="navbar-form">
-									<input class="form-control" placeholder="Search" type="text">
+							<li class="active" style="background-color: gray;">
+								<form class="navbar-form" th:action="@{/SearchKeywords}" method="post">
+									<input class="form-control" placeholder="Search" type="text" name="keywords">	
+									<button class="btn btn-primary">Find</button> 				
 								</form>
 							</li>
-							<li class="active"><a href="#">Home</a></li>
-							<li class="dropdown"><a href="#">Products</a></li>
+							<li><a href="/">Home</a></li>
+							<li><a href="/productlist">Products</a></li>
 							<li><a href="#">Deals</a></li>
 							<li><a href="#">Stores</a></li>
 							<li><a href="#">Contact</a></li>
 
 						</ul>
+						
 						<ul class="nav navbar-nav navbar-right">
-
-							<li class="dropdown"><a data-toggle="dropdown"
-								class="dropdown-toggle" href="#" style="padding: 5px 5px;">
-									<img alt="" th:src="@{'/img/photos/' + ${#authentication.getPrincipal().getPhoto()}}" height="38" width="38" style="border-radius: 50%; padding: 0;">
-									<span class="username" th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
-									<b class="caret"></b>
-							</a>
-								<ul class="dropdown-menu extended logout">
-									<span class="log-arrow-up"></span>
-									<li class="eborder-top"><a
-										th:href="@{/users/findById/(id=${#authentication.getPrincipal().getId()})}">
-											<i class="icon_profile"></i> My Profile
-									</a></li>
-									<li><a><i class="icon_mail_alt"></i>My Inbox</a></li>
-									<li><a href="#"><i class="icon_clock_alt"></i>Timeline</a></li>
-									<li><a href="#"><i class="icon_chat_alt"></i>Chats</a></li>
-									<li><a th:href="@{/logout}"><i class="icon_key_alt"></i>Log
-											Out</a></li>
-									<li><a href="documentation.html"><i
-											class="icon_key_alt"></i> Documentation</a></li>
-									<li><a href="documentation.html"><i
-											class="icon_key_alt"></i> Documentation</a></li>
-								</ul></li>
-							<li class="active"><a href="#"><span
-									class="glyphicon glyphicon-user"></span> Yêu thích</a></li>
-							<li><a href="#"><span
-									class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng</a></li>
-
+							<li class="dropdown">
+								<a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding: 5px 5px;">
+										<img alt="" th:src="@{'/img/photos/' + ${#authentication.getPrincipal().getPhoto()}}" height="38" width="38" style="border-radius: 50%; padding: 0;">
+										<span class="username" th:text="${#authentication.getPrincipal().getName()}">Guest</span>
+										<b class="caret"></b>
+								</a>
+									<ul class="dropdown-menu extended logout">
+										<span class="log-arrow-up"></span>
+										<li class="eborder-top">
+											<a th:href="@{/users/profile}">
+													<input type="text" th:value="${#authentication.getPrincipal().getId()}" name="id" hidden="hidden">
+													<i class="icon_profile"></i> My Profile
+											</a>
+										</li>
+										
+										<li><a><i class="icon_mail_alt"></i>My Inbox</a></li>
+										<li><a href="#"><i class="icon_clock_alt"></i>Timeline</a></li>
+										<li><a href="#"><i class="icon_chat_alt"></i>Chats</a></li>
+										<li><a th:href="@{/logout}"><i class="icon_key_alt"></i>Log
+												Out</a></li>
+										<li><a href="documentation.html"><i
+												class="icon_key_alt"></i> Documentation</a></li>
+										<li><a href="documentation.html"><i
+												class="icon_key_alt"></i> Documentation</a></li>
+									</ul>
+							</li>
+							
+							<li class="active">
+								<a href="#"><span class="glyphicon glyphicon-user"></span> Yêu thích</a>
+							</li>
+							
+							<li>
+								<a href="#"> <span class="glyphicon glyphicon-shopping-cart"></span>Giỏ hàng</a>
+							</li>
 						</ul>
 					</div>
 				</div>

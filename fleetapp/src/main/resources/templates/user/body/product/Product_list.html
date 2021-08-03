@@ -19,7 +19,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 						<div class="col-sm-3" style="margin-top: 30px;">
 							<div class="card-group">
 								<div class="card ">
-										<!-- Top của card -->
+										<!-- Top cá»§a card -->
 										<a th:href="@{/product/detail?id=}+${product.id}" class="caption-picture">
 											<div class="discount" th:with="condition=${product.discount}" >
 												<!-- IF -->
@@ -28,24 +28,24 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 												</div>
 												<!-- ELSE -->
 												<div th:unless="${condition}">
-													<div class="discount-label "><span style="color: whitesmoke;">0</span></div>
+													<div class="discount-label"><span style="color: whitesmoke;">0</span></div>
 												</div>
 											</div> 
 											<img class="card-img-top" th:src="@{'/img/product/' + ${product.image}}" title="something">
 										</a>
-										<!-- Body của card -->
+										<!-- Body cá»§a card -->
 										<div class="card-body">
 											<div class="caption-price">
 												<p style="padding: 3px; text-align: center; color: black;" class="book-name" th:text="${product.bookname}"></p>
 												<div th:with="condition=${product.discount}" class="d-flex justify-content-center">
 													<!-- IF CUSTOMER IS ANONYMOUS -->
 													<div th:if="${condition}" >
-														<span style="text-decoration: line-through; color: Gray; font-weight: bold;" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}+' VNĐ'"></span>
-														<span style="text-align: left; font-weight: bold; color: #db3208;" th:text="${#numbers.formatDecimal(product.price * (1 - product.discount), 0, 'COMMA', 2, 'POINT')}+' VNĐ'"></span>
+														<span style="text-decoration: line-through; color: Gray; font-weight: bold;" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}+' VNÄ�'"></span>
+														<span style="text-align: left; font-weight: bold; color: #db3208;" th:text="${#numbers.formatDecimal(product.price * (1 - product.discount), 0, 'COMMA', 2, 'POINT')}+' VNÄ�'"></span>
 													</div>
 													<!-- ELSE -->
 													<div th:unless="${condition}">
-														<span style="text-align: left; font-weight: bold; color: #db3208;" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}+' VNĐ'"></span>
+														<span style="text-align: left; font-weight: bold; color: #db3208;" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}+' VNÄ�'"></span>
 													</div>
 												</div>
 											</div>
