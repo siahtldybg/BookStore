@@ -32,4 +32,8 @@ public class ProductService {
     public void delete(Integer id) {
         productRepository.deleteById(id);
     }
+    public List<Product> findByBookname(String keyword) {
+        return productRepository.getByBookName(keyword);
+    }
+    
 }
