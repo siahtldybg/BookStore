@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.tutorial.fleetapp.models.Comment;
 import com.tutorial.fleetapp.models.User;
@@ -53,11 +52,11 @@ public class ProductController {
 	}
 
 	@RequestMapping("product/detail")
-	public String getProductDetail(Model model,@PathParam("id") Integer id) {
+	public String getProductDetail(Model model, @PathParam("id") Integer id) {
 		Optional<Product> product1 = productService.findById(id);
 		//Trả về object sản phẩm
 		Product product = product1.get();
-		model.addAttribute("product",product);
+		model.addAttribute("product", product);
 		// Trả về mảng sản phẩm
 		List<Product> productList = productService.getProduct();
 		model.addAttribute("products", productList);
@@ -72,6 +71,7 @@ public class ProductController {
 		model.addAttribute("producttypes", productTypeList);
 		return "user/body/product/Product_Detail";
 	}
+
 	@PostMapping("/SearchKeywords")
 	public String SearchKeywords(Model model,  @RequestParam("keywords") String keywords) {
 		List<Product> productList = productService.findByKeywords(keywords);
@@ -81,12 +81,13 @@ public class ProductController {
 		return "user/body/product/Product_list";
 	}
 	
-	
 	@RequestMapping("/SearchProducttype")
-	public RedirectView getProductType(Model model) {
-		RedirectView redirectView = new RedirectView();
-		redirectView.setUrl("https://www.youtube.com/watch?v=AuRQe-7gYBs");
-		return redirectView;
+	public String getProductType(Model model, @PathParam("id") Integer id) {
+		List<Product> productList = productService.findByProductType(id);
+		model.addAttribute("products", productList);
+		List<ProductType> productTypeList = productTypeService.getProductType();
+		model.addAttribute("producttypes", productTypeList);
+		return "user/body/product/Product_list";
 	}
 	
 	

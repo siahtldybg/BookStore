@@ -54,7 +54,7 @@
 								<ul class="dropdown-menu extended logout">
 									<span class="log-arrow-up"></span>
 									<li th:each="producttype : ${producttypes}" th:attr="data-value=${producttype.id}">
-										<a th:href='@{/SearchProducttype}'>
+										<a th:href="@{/SearchProducttype?id=}+${producttype.id}">
 											<span th:text="${producttype.category}">No information</span>
 										</a>
 									</li>

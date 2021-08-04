@@ -40,12 +40,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 												<div th:with="condition=${product.discount}" class="d-flex justify-content-center">
 													<!-- IF CUSTOMER IS ANONYMOUS -->
 													<div th:if="${condition}" >
-														<span style="text-decoration: line-through; color: Gray; font-weight: bold;" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}+' VNÄ�'"></span>
-														<span style="text-align: left; font-weight: bold; color: #db3208;" th:text="${#numbers.formatDecimal(product.price * (1 - product.discount), 0, 'COMMA', 2, 'POINT')}+' VNÄ�'"></span>
+														<span style="text-decoration: line-through; color: Gray; font-weight: bold;" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}+' VNĐ'"></span>
+														<span style="text-align: left; font-weight: bold; color: #db3208;" th:text="${#numbers.formatDecimal(product.price * (1 - product.discount), 0, 'COMMA', 2, 'POINT')}+' VNĐ'"></span>
 													</div>
 													<!-- ELSE -->
 													<div th:unless="${condition}">
-														<span style="text-align: left; font-weight: bold; color: #db3208;" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}+' VNÄ�'"></span>
+														<span style="text-align: left; font-weight: bold; color: #db3208;" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}+' VNĐ'"></span>
 													</div>
 												</div>
 											</div>

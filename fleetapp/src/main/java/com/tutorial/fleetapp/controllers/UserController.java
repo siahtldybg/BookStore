@@ -28,6 +28,7 @@ import com.tutorial.fleetapp.models.Comment;
 import com.tutorial.fleetapp.models.Product;
 import com.tutorial.fleetapp.models.ProductType;
 import com.tutorial.fleetapp.models.User;
+import com.tutorial.fleetapp.services.ProductTypeService;
 import com.tutorial.fleetapp.services.UserService;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,6 +49,9 @@ public class UserController {
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+
+	@Autowired
+	private ProductTypeService productTypeService;
 	
 	@Autowired
 	ServletContext app;
@@ -91,12 +95,9 @@ public class UserController {
 	public String changePassword(Model model, RedirectAttributes redir, @RequestParam("id") Integer id,
 			@RequestParam("password") String pw, @RequestParam("newpassword") String pw1,
 			@RequestParam("confirmPassword") String pw2) {
-
 		PasswordEncoder passencoder = new BCryptPasswordEncoder();
-
 		Optional<User> user1 = userService.findById(id);
 		User user = user1.get();
-
 		if (!pw1.equals(pw2)) {
 			redir.addFlashAttribute("message", "Xác nhận mật khẩu không trùng khớp!");
 		} else {
@@ -110,18 +111,17 @@ public class UserController {
 				redir.addFlashAttribute("message", "Thay đổi mật khẩu thành công!");
 			}
 		}
-
 		return "redirect:/users/profile";
 	}
 
 	// Hiển thị thông tin user
 	@RequestMapping("/users/profile")
 	public String getProfileHeader(Model model, Principal principal) {
+		List<ProductType> productTypeList = productTypeService.getProductType();
+		model.addAttribute("producttypes", productTypeList);
 		// Get the User in a Controller
 		User profile = userService.findByUsername(principal.getName());
-
 		model.addAttribute("profile", profile);
-
 		return "/user/body/account/Profile";
 	}
 

@@ -37,4 +37,7 @@ public class ProductService {
         return productRepository.getByBookname(keyword);
     }
     
+    public List<Product> findByProductType(Integer id) {
+        return productRepository.getByProductType(id);
+    }
 }
