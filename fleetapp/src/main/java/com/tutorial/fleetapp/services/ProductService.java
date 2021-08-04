@@ -33,6 +33,12 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
+    /*Cách 1: Tìm kiếm tên sách = keyword chính xác tuyệt đối (Không edit query) 
+    => Note: đặt tên findBy/getBy + thuộc tính CÓ TRONG model */
+	public List<Product> findByBookname(String keyword) {
+		return productRepository.findByBookname(keyword);
+	}
+	/*Cách 2: Tìm kiếm tên sách = query chỉnh sửa */
     public List<Product> findByKeywords(String keyword) {
         return productRepository.getByBookname(keyword);
     }
