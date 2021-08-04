@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.tutorial.fleetapp.models.Comment;
 import com.tutorial.fleetapp.models.User;
@@ -71,7 +72,6 @@ public class ProductController {
 		model.addAttribute("producttypes", productTypeList);
 		return "user/body/product/Product_Detail";
 	}
-	
 	@PostMapping("/SearchKeywords")
 	public String SearchKeywords(Model model,  @RequestParam("keywords") String keywords) {
 		List<Product> productList = productService.findByKeywords(keywords);
@@ -81,6 +81,13 @@ public class ProductController {
 		return "user/body/product/Product_list";
 	}
 	
+	
+	@RequestMapping("/SearchProducttype")
+	public RedirectView getProductType(Model model) {
+		RedirectView redirectView = new RedirectView();
+		redirectView.setUrl("https://www.youtube.com/watch?v=AuRQe-7gYBs");
+		return redirectView;
+	}
 	
 	
 	//ADMIN
