@@ -53,6 +53,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 									<span th:case="false" style="color: red; font-weight: bolder;">Hết hàng</span>
 								</div>
 							</div>
+							<div class="row">
+									<span style="font-weight: bolder;">Tác giả: </span>
+									<span th:text="${product.author}" style="color: purple; font-weight: bolder;">No information</span>
+							</div>
 
 							<div class="row">
 									<span style="font-weight: bolder;">Mô tả: </span>
