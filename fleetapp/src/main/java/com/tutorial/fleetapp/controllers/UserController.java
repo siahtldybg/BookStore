@@ -3,6 +3,7 @@ package com.tutorial.fleetapp.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,21 +100,9 @@ public class UserController {
 		return "/user/body/account/Profile";
 	}
 
-//	@RequestMapping("/users/profile")
-//	public String getProfileHeader(Model model) {
-//		//Get the User in a Controller
-//		
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-//		    String currentUserName = authentication.getName();
-//		    return currentUserName;
-//		}
-//		
-//
-//		return "/user/body/account/Profile";
-//	}
 
-	// ADMIN
+
+	/*ADMIN*/
 
 	@GetMapping("/users")
 	public String getUsers(Model model) {
@@ -148,10 +137,12 @@ public class UserController {
 		return "redirect:/login";
 	}
 
+
+	
 	@PostMapping(value = "users/addNew")
 	public String addNew(User user, RedirectAttributes redir, @RequestParam("password") String password,
 			@RequestParam("confirmPassword") String confirmPassword, @RequestParam("username") String username,
-			@RequestParam("photo") String photo) {
+			@RequestParam("photo_upload") MultipartFile file)throws IllegalStateException, IOException {
 
 		if (userService.findByUsername(username) != null) {
 			redir.addFlashAttribute("message", "Tên đăng nhập đã tồn tại!!!");
@@ -161,14 +152,23 @@ public class UserController {
 			redir.addFlashAttribute("message", "Mật khẩu không trùng khớp!!!");
 			return "redirect:/users";
 		}
-		if (photo.isEmpty()) {
+		
+		if(!file.isEmpty()) {
+			String realPath = ResourceUtils.getURL("classpath:").getPath() + "static"+"/img/photos/";
+			File f = new File(realPath, file.getOriginalFilename());
+			file.transferTo(f);
+			user.setPhoto(f.getName());
+		}else {
 			user.setPhoto("user.jpg");
 		}
+		
 		redir.addFlashAttribute("message", "Tạo tài khoản thành công!!!");
 		userService.save(user);
 		return "redirect:/users";
 
 	}
+	
+
 
 	@RequestMapping(value = "/users/update", method = { RequestMethod.PUT, RequestMethod.GET })
 	public String update(User user, @RequestParam("photo") String photo, @RequestParam("image") String image,

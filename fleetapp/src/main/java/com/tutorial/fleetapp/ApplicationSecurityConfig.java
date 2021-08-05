@@ -25,11 +25,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/register/**", "/resources/**", "/css/**", "/fonts/**", "/img/**", "/js/**").permitAll()
 				.antMatchers("/").hasAnyAuthority("USER", "ADMIN")
 				.antMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
+				.antMatchers("/product/**").hasAnyAuthority("USER", "ADMIN")
+				
 				.antMatchers("/admin/**").hasAuthority("ADMIN")
-				.antMatchers("/product").hasAnyAuthority("USER", "ADMIN")
-				.antMatchers("/product/**").hasAuthority("ADMIN")
-
-				// .antMatchers("/users/addNew").permitAll()
+				.antMatchers("/products/**").hasAuthority("ADMIN")
+				.antMatchers("/users/**").hasAuthority("ADMIN")
+				.antMatchers("/producttypes/**").hasAuthority("ADMIN")
+				.antMatchers("/backup/**").hasAuthority("ADMIN")
+				
 				.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
 				.invalidateHttpSession(true).clearAuthentication(true)
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll()
@@ -37,9 +40,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				.headers().xssProtection();
 				
-				/*
-				 * .formLogin().permitAll() .and() .logout().permitAll() .and()
-				 */
+		//http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
+				
 //				.exceptionHandling().accessDeniedPage("/403");
 	}
 
