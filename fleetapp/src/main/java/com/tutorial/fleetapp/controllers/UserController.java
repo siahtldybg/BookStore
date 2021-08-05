@@ -57,6 +57,8 @@ public class UserController {
 		profile.setLastname(lname);
 		if(!file.isEmpty()) {
 			String realPath = ResourceUtils.getURL("classpath:").getPath() + "static"+"/img/photos";
+			
+			//String realPath= new File(".").getCanonicalPath() + "/src/main/resources/static/img/photos";
 			File f = new File(realPath, file.getOriginalFilename());
 			file.transferTo(f);
 			profile.setPhoto(f.getName());

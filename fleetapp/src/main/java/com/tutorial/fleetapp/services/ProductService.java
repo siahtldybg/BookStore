@@ -46,4 +46,8 @@ public class ProductService {
     public List<Product> findByProductType(Integer id) {
         return productRepository.getByProductType(id);
     }
+    
+    public List<Product> findBySpecial() {
+        return productRepository.getBySpecial();
+    }
 }
