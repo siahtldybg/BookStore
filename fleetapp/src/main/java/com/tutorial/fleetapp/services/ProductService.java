@@ -47,6 +47,7 @@ public class ProductService {
         return productRepository.getByProductType(id);
     }
     
+    //Hiển thị danh sách sp Đặc biệt (special)
     public List<Product> findBySpecial() {
         return productRepository.getBySpecial();
     }

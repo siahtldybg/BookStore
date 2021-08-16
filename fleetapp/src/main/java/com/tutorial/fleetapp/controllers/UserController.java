@@ -57,8 +57,6 @@ public class UserController {
 		profile.setLastname(lname);
 		if(!file.isEmpty()) {
 			String realPath = ResourceUtils.getURL("classpath:").getPath() + "static"+"/img/photos";
-			
-			//String realPath= new File(".").getCanonicalPath() + "/src/main/resources/static/img/photos";
 			File f = new File(realPath, file.getOriginalFilename());
 			file.transferTo(f);
 			profile.setPhoto(f.getName());
@@ -154,9 +152,8 @@ public class UserController {
 			redir.addFlashAttribute("message", "Mật khẩu không trùng khớp!!!");
 			return "redirect:/users";
 		}
-		
 		if(!file.isEmpty()) {
-			String realPath = ResourceUtils.getURL("classpath:").getPath() + "static"+"/img/photos/";
+			String realPath = ResourceUtils.getURL("classpath:").getPath() + "static"+"/img/photos";
 			File f = new File(realPath, file.getOriginalFilename());
 			file.transferTo(f);
 			user.setPhoto(f.getName());
