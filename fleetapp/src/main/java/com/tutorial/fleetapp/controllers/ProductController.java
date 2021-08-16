@@ -44,10 +44,10 @@ public class ProductController {
 	
 	/*ACCOUNT*/
 	@GetMapping("/productlist")
-	public String getProductView(Model model, Principal principal) {
+	public String getProductView(Model model) {
 		//Hiển thị dropdown menuheader nếu quyền admin
-		User profile = userService.findByUsername(principal.getName());
-		model.addAttribute("profile", profile);
+		// User profile = userService.findByUsername(principal.getName());
+		// model.addAttribute("profile", profile);
 		
 		//Hiển thị ds sp tương ứng vs loại sp trên menu header
 		List<Product> productList = productService.getProduct();
@@ -59,10 +59,10 @@ public class ProductController {
 	}
 
 	@RequestMapping("product/detail")
-	public String getProductDetail(Model model, @PathParam("id") Integer id, Principal principal) {
+	public String getProductDetail(Model model, @PathParam("id") Integer id) {
 		//Hiển thị dropdown menuheader nếu quyền admin
-		User profile = userService.findByUsername(principal.getName());
-		model.addAttribute("profile", profile);
+		// User profile = userService.findByUsername(principal.getName());
+		// model.addAttribute("profile", profile);
 		Optional<Product> product1 = productService.findById(id);
 		//Trả về object sản phẩm
 		Product product = product1.get();
@@ -84,10 +84,10 @@ public class ProductController {
 	
 	//Chức năng: Tìm kiếm (gần đúng) trong menu header
 	@PostMapping("/SearchKeywords")
-	public String SearchKeywords(Model model,  @RequestParam("keywords") String keywords, Principal principal) {
+	public String SearchKeywords(Model model,  @RequestParam("keywords") String keywords) {
 		//Hiển thị dropdown menuheader nếu quyền admin
-		User profile = userService.findByUsername(principal.getName());
-		model.addAttribute("profile", profile);
+		// User profile = userService.findByUsername(principal.getName());
+		// model.addAttribute("profile", profile);
 		
 		//Hiển thị dropdown Category trong menu header
 		List<ProductType> productTypeList = productTypeService.getProductType();
@@ -101,10 +101,10 @@ public class ProductController {
 	
 	//Hiển thị danh sách dropdown Category
 	@RequestMapping("/SearchProducttype")
-	public String getProductType(Model model, @PathParam("id") Integer id, Principal principal) {
+	public String getProductType(Model model, @PathParam("id") Integer id) {
 		//Hiển thị dropdown menuheader nếu quyền admin
-		User profile = userService.findByUsername(principal.getName());
-		model.addAttribute("profile", profile);
+		// User profile = userService.findByUsername(principal.getName());
+		// model.addAttribute("profile", profile);
 		//Hiển thị dropdown Category trong menu header
 		List<ProductType> productTypeList = productTypeService.getProductType();
 		model.addAttribute("producttypes", productTypeList);
@@ -117,9 +117,9 @@ public class ProductController {
 	
 	//Hiển thị All sp nổi bật
 		@RequestMapping("/productspecial")
-		public String getAllProductSpecial(Model model, Principal principal) {
-			User profile = userService.findByUsername(principal.getName());
-			model.addAttribute("profile", profile);
+		public String getAllProductSpecial(Model model) {
+			// User profile = userService.findByUsername(principal.getName());
+			// model.addAttribute("profile", profile);
 			List<Product> productList = productService.findBySpecial();
 			model.addAttribute("products", productList);
 			List<ProductType> productTypeList = productTypeService.getProductType();

@@ -25,7 +25,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/register/**", "/resources/**", "/css/**", "/fonts/**", "/img/**", "/js/**").permitAll()
 				
 				.antMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
-				.antMatchers("/product/**").hasAnyAuthority("USER", "ADMIN")
+				.antMatchers("/product/addCommentProduct/**").hasAnyAuthority("USER", "ADMIN")
+				.antMatchers("/product/**").permitAll()
 				
 				.antMatchers("/products/**").hasAuthority("ADMIN")
 				.antMatchers("/users/**").hasAuthority("ADMIN")
