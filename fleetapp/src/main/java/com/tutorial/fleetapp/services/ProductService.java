@@ -51,4 +51,9 @@ public class ProductService {
     public List<Product> findBySpecial() {
         return productRepository.getBySpecial();
     }
+    
+  //Hiển thị danh sách sp Mới nhất
+    public List<Product> findByDate() {
+        return productRepository.getByDate();
+    }
 }

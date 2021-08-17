@@ -206,11 +206,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 			<li><a data-toggle="tab" href="#tab2">SẢN PHẨM YÊU THÍCH</a></li>
 			<li><a data-toggle="tab" href="#tab3">SẢN PHẨM ĐÃ XEM</a></li>
 		</ul>
-	
+		
+		
 		<div class="tab-content">
+			<!-- TAB SẢN PHẨM CÙNG LOẠI -->
 			<div id="tab1" class="tab-pane fade in active">
 				<div class="gia-soc1" style="margin-top: 30px;">
 					<div class="row" style="padding: 20px; margin-top: -10px; height: auto; justify-content: center;">
+						<!-- Hiển thị 3 sản phẩm trượt -->
 						<th:block th:each="i: ${#numbers.sequence(0, 2)}" th:with="product=${products[i]}">
 							<div class="col-sm-3">
 								<div class="card-group">
@@ -269,10 +272,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 					</div>
 				</div>
 			</div>
-			
+			<!-- TAB SẢN PHẨM YÊU THÍCH -->
 			<div id="tab2" class="tab-pane fade">
 				<div class="gia-soc1" style="margin-top: 30px;">
 					<div class="row" style="padding: 20px; margin-top: -10px; height: auto; justify-content: center;">
+						<!-- Hiển thị 0,1 => 2 sản phẩn trên thanh trượt -->
 						<th:block th:each="i: ${#numbers.sequence(0, 1)}" th:with="product=${products[i]}">
 							<div class="col-sm-3">
 								<div class="card-group">
@@ -332,10 +336,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 				</div>
 			</div>
 			
-			
+			<!-- TAB SẢN PHẨM ĐÃ XEM -->
 			<div id="tab3" class="tab-pane fade">
 				<div class="gia-soc1" style="margin-top: 30px;">
 					<div class="row" style="padding: 20px; margin-top: -10px; height: auto; justify-content: center;">
+						<!-- Hiển thị (0-1)=> 2 sản phẩm thanh trượt -->
 						<th:block th:each="i: ${#numbers.sequence(0, 1)}" th:with="product=${products[i]}">
 							<div class="col-sm-3">
 								<div class="card-group">

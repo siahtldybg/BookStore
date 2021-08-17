@@ -39,6 +39,15 @@ public class ApplicationController {
 		List<Product> productList = productService.getProduct();
 		model.addAttribute("products", productList);
 		
+		 /* Hiển thị ds SẢN PHẨM NỔI BẬT trong nextslide 
+		  * => hiển thị tại user/body/product/Product_special */
+		List<Product> productListSpecial = productService.findBySpecial();
+		model.addAttribute("productspecials", productListSpecial);
+		
+		/* Hiển thị ds SẢN PHẨM MỚI NHẤT trong nextslide 
+		  * => hiển thị tại user/body/product/Product_new */
+		List<Product> productListNew = productService.findByDate();
+		model.addAttribute("productnews", productListNew);
 		return "user/index";
 	}
 	

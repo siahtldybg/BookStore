@@ -44,7 +44,7 @@
 		</div>
 	</div>
 
-	<!-- slide -->
+	<!-- slide nổi bật -->
 	<div class="gia-soc" style="margin-top: 30px">
 		<div style="background-color: rgb(206, 18, 18); width: 100%; height: auto; margin-top: -10px; font-weight: bold; padding: 15px">
 			<span style="color: #fff; text-align: left; font-size: 26px;">SẢN PHẨM NỔI BẬT</span> 
@@ -53,7 +53,7 @@
 			</span>
 		</div>
 		<div style="padding: 20px 0px 0px 10px; margin-top: -10px; height: auto; justify-content: center;">
-			<div th:replace="user/body/product/Product_list :: sub-content"></div>
+			<div th:replace="user/body/product/Product_special :: sub-content"></div>
 		</div>
 	</div>
 
@@ -65,7 +65,7 @@
 			</span>
 		</div>
 		<div class="row" style="padding: 20px; margin-top: -10px; height: auto; justify-content: center;">
-			<jsp:include page="../product/list-by-new.jsp" />
+			<div th:replace="user/body/product/Product_new :: sub-content"></div>
 		</div>
 	</div>
 

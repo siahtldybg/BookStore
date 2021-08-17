@@ -34,25 +34,24 @@ public class ProductController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private CommentService commentService;
 
 	@Autowired
 	private ProductTypeService productTypeService;
-	
-	
-	/*ACCOUNT*/
+
+	/* ACCOUNT */
 	@GetMapping("/productlist")
 	public String getProductView(Model model) {
-		//Hiển thị dropdown menuheader nếu quyền admin
+		// Hiển thị dropdown menuheader nếu quyền admin
 		// User profile = userService.findByUsername(principal.getName());
 		// model.addAttribute("profile", profile);
-		
-		//Hiển thị ds sp tương ứng vs loại sp trên menu header
+
+		// Hiển thị ds sp tương ứng vs loại sp trên menu header
 		List<Product> productList = productService.getProduct();
 		model.addAttribute("products", productList);
-		//Hiển thị list category trên menu header
+		// Hiển thị list category trên menu header
 		List<ProductType> productTypeList = productTypeService.getProductType();
 		model.addAttribute("producttypes", productTypeList);
 		return "user/body/product/Product_list";
@@ -60,11 +59,11 @@ public class ProductController {
 
 	@RequestMapping("product/detail")
 	public String getProductDetail(Model model, @PathParam("id") Integer id) {
-		//Hiển thị dropdown menuheader nếu quyền admin
+		// Hiển thị dropdown menuheader nếu quyền admin
 		// User profile = userService.findByUsername(principal.getName());
 		// model.addAttribute("profile", profile);
 		Optional<Product> product1 = productService.findById(id);
-		//Trả về object sản phẩm
+		// Trả về object sản phẩm
 		Product product = product1.get();
 		model.addAttribute("product", product);
 		// Trả về mảng sản phẩm
@@ -79,56 +78,69 @@ public class ProductController {
 		// Trả về mảng loại sản phẩm
 		List<ProductType> productTypeList = productTypeService.getProductType();
 		model.addAttribute("producttypes", productTypeList);
+		
 		return "user/body/product/Product_Detail";
 	}
-	
-	//Chức năng: Tìm kiếm (gần đúng) trong menu header
+
+	// Chức năng: Tìm kiếm (gần đúng) trong menu header
 	@PostMapping("/SearchKeywords")
-	public String SearchKeywords(Model model,  @RequestParam("keywords") String keywords) {
-		//Hiển thị dropdown menuheader nếu quyền admin
+	public String SearchKeywords(Model model, @RequestParam("keywords") String keywords) {
+		// Hiển thị dropdown menuheader nếu quyền admin
 		// User profile = userService.findByUsername(principal.getName());
 		// model.addAttribute("profile", profile);
-		
-		//Hiển thị dropdown Category trong menu header
+
+		// Hiển thị dropdown Category trong menu header
 		List<ProductType> productTypeList = productTypeService.getProductType();
 		model.addAttribute("producttypes", productTypeList);
-		//Hiển thị sản phẩm tương ứng mỗi loại sp Category
+		// Hiển thị sản phẩm tương ứng mỗi loại sp Category
 		List<Product> productList = productService.findByKeywords(keywords);
 		model.addAttribute("products", productList);
 
 		return "user/body/product/Product_list";
 	}
-	
-	//Hiển thị danh sách dropdown Category
+
+	// Hiển thị danh sách dropdown Category
 	@RequestMapping("/SearchProducttype")
 	public String getProductType(Model model, @PathParam("id") Integer id) {
-		//Hiển thị dropdown menuheader nếu quyền admin
+		// Hiển thị dropdown menuheader nếu quyền admin
 		// User profile = userService.findByUsername(principal.getName());
 		// model.addAttribute("profile", profile);
-		//Hiển thị dropdown Category trong menu header
+		// Hiển thị dropdown Category trong menu header
 		List<ProductType> productTypeList = productTypeService.getProductType();
 		model.addAttribute("producttypes", productTypeList);
-		//Hiển thị sản phẩm tương ứng mỗi loại sp Category
+		// Hiển thị sản phẩm tương ứng mỗi loại sp Category
 		List<Product> productList = productService.findByProductType(id);
 		model.addAttribute("products", productList);
-		
+
+		return "user/body/product/Product_list";
+	}
+
+	// Hiển thị All sp nổi bật
+	@RequestMapping("/productspecial")
+	public String getAllProductSpecial(Model model) {
+		// User profile = userService.findByUsername(principal.getName());
+		// model.addAttribute("profile", profile);
+		List<Product> productList = productService.findBySpecial();
+		model.addAttribute("products", productList);
+		List<ProductType> productTypeList = productTypeService.getProductType();
+		model.addAttribute("producttypes", productTypeList);
 		return "user/body/product/Product_list";
 	}
 	
-	//Hiển thị All sp nổi bật
-		@RequestMapping("/productspecial")
-		public String getAllProductSpecial(Model model) {
-			// User profile = userService.findByUsername(principal.getName());
-			// model.addAttribute("profile", profile);
-			List<Product> productList = productService.findBySpecial();
-			model.addAttribute("products", productList);
-			List<ProductType> productTypeList = productTypeService.getProductType();
-			model.addAttribute("producttypes", productTypeList);
-			return "user/body/product/Product_list";
-		}
-	
-	/*ADMIN*/
-	//Hiển thị toàn bộ thông tin sp
+	// Hiển thị All sp mới nhất
+	@RequestMapping("/productnew")
+	public String getAllProductNew(Model model) {
+		// User profile = userService.findByUsername(principal.getName());
+		// model.addAttribute("profile", profile);
+		List<Product> productList = productService.findByDate();
+		model.addAttribute("productnews", productList);
+		List<ProductType> productTypeList = productTypeService.getProductType();
+		model.addAttribute("producttypes", productTypeList);
+		return "user/body/product/Product_new";
+	}
+
+	/* ADMIN */
+	// Hiển thị toàn bộ thông tin sp
 	@GetMapping("/products")
 	public String getProduct(Model model) {
 		List<Product> productList = productService.getProduct();
@@ -138,17 +150,17 @@ public class ProductController {
 		model.addAttribute("producttypes", productTypeList);
 		return "admin/body/product";
 	}
-	
+
 	@RequestMapping("products/findById")
 	@ResponseBody
 	public Optional<Product> findById(Integer id) {
 		return productService.findById(id);
 	}
-	
-	//Chức năng: Thêm sản phẩm
+
+	// Chức năng: Thêm sản phẩm
 	@GetMapping("/products/productadd")
 	public String addProduct(Model model) {
-		//Hiển thị drop down loại sp
+		// Hiển thị drop down loại sp
 		List<ProductType> productTypeList = productTypeService.getProductType();
 		model.addAttribute("producttypes", productTypeList);
 
@@ -160,8 +172,8 @@ public class ProductController {
 		productService.save(product);
 		return "redirect:/products";
 	}
-	
-	//Chức năng: Chỉnh sửa sản phẩm
+
+	// Chức năng: Chỉnh sửa sản phẩm
 	@RequestMapping(value = "products/update", method = { RequestMethod.PUT, RequestMethod.GET })
 	public String update(Product product, @RequestParam("photo") String photo, @RequestParam("image") String image) {
 		if (image.isEmpty()) {
@@ -172,8 +184,8 @@ public class ProductController {
 		productService.save(product);
 		return "redirect:/products";
 	}
-	
-	//Chức năng xóa sản phẩm
+
+	// Chức năng xóa sản phẩm
 	@RequestMapping(value = "products/delete", method = { RequestMethod.DELETE, RequestMethod.GET })
 	public String xoa(Integer id) {
 		productService.delete(id);

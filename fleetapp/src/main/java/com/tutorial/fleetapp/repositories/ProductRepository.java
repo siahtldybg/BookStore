@@ -26,4 +26,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	//Hiển thị sp đặc biệt - theo từ ngày mới nhất
 	@Query("SELECT p FROM Product p WHERE p.special= true  ORDER BY p.date ASC")
 	public List<Product> getBySpecial();
+	
+	//Hiển thị sp mới nhất
+	@Query("SELECT p FROM Product p ORDER BY p.date DESC")
+	public List<Product> getByDate();
 }
