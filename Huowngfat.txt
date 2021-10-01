@@ -1,0 +1,7 @@
+gcc -ggdb -fno-stack-protector -z execstack -no-pie stringformat.c -o stringformat.o
+My name is %p %p %p
+My name is %p %s %p
+My name is %s %p %p
+BBBBAAAA %p %p %p %p %p %p %p %p %p %p %p %p %p %p %p
+AAAA %11$p %p %p %p
+AAAA %11$p %s %p
